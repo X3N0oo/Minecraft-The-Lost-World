@@ -1,13 +1,660 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Minecraft: The Lost World</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minecraft: The Lost World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
-:root{--bg:#081411;--panel:#13261e;--line:#365745;--lime:#a8df72;--text:#edf4e7;--muted:#afc1b4}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}button,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:0 30px}header{height:79px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a493b}header strong{font-size:14px;letter-spacing:2px}header nav{display:flex;gap:23px;align-items:center}header button,header a{background:none;border:0;color:#cfddcf;font-size:13px;text-decoration:none}header button:hover,header a:hover{color:var(--lime)}.logo{display:inline-block;width:21px;height:21px;background:linear-gradient(135deg,#9ed46e 50%,#3d6838 50%);vertical-align:middle;margin-right:10px;box-shadow:3px 3px #1e3c25}
-h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.05em}h1{font-size:clamp(44px,6.5vw,92px);line-height:1.02;margin:20px 0}h2{font-size:46px;line-height:1.1;margin:15px 0}p{line-height:1.85}.eyebrow{font-size:12px;letter-spacing:3px;color:var(--lime);font-weight:700;text-transform:uppercase}.btn{padding:16px 22px;border:1px solid #a5cf83;background:var(--lime);color:#142319;font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;box-shadow:5px 5px #020a06}.btn:hover{background:#c2f69e}.btn.alt{background:#14281e;color:#eaf4e6;border-color:#739b78}.hero{position:relative;overflow:hidden;min-height:650px;background:radial-gradient(ellipse at 75% 17%,#6d7253,#26443c 35%,#0b231c 70%)}.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#07140ff5 5%,#07140fc4 45%,#07140f29 100%);z-index:2}.pixels{position:absolute;bottom:0;left:0;right:0;height:76%;background:linear-gradient(0deg,#092016,#143b2d);clip-path:polygon(0 45%,8% 45%,8% 29%,17% 29%,17% 48%,29% 48%,29% 35%,42% 35%,42% 47%,54% 47%,54% 22%,63% 22%,63% 39%,74% 39%,74% 17%,83% 17%,83% 33%,92% 33%,92% 44%,100% 44%,100% 100%,0 100%)}.temple{position:absolute;right:12%;bottom:13%;width:220px;height:260px;background:repeating-linear-gradient(0deg,#4d7255 0 35px,#2d4a3a 35px 40px);border:20px solid #395840;border-top:35px solid #557a58;box-shadow:0 0 0 18px #314e3b,0 0 0 35px #223e32}.temple:after{content:'';position:absolute;bottom:-20px;left:60px;width:55px;height:110px;background:#0b160e;box-shadow:inset 0 0 30px #c1843b}.hero .wrap{position:relative;z-index:3;padding-top:105px;padding-bottom:110px}.hero h1{max-width:800px;text-transform:uppercase}.hero h1 span{color:var(--lime)}.hero p{max-width:540px;color:#d3e0d5}.hero .buttons{margin-top:30px}.buttons{display:flex;flex-wrap:wrap;gap:14px}.statline{display:flex;justify-content:space-between;padding:20px 0;font-size:12px;letter-spacing:2px;color:#a5b8a8;text-transform:uppercase;border-top:1px solid #3b5545}.section{padding:80px 0}.intro{color:var(--muted);max-width:700px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}.card{background:linear-gradient(145deg,#1b3428,#10221c);padding:30px;border:1px solid var(--line);min-height:210px}.card b{color:var(--lime);letter-spacing:2px;font-size:12px}.card h3{font-size:26px;margin:35px 0 10px}.card p{color:var(--muted);font-size:14px;margin:0}.game{padding:70px 0 90px;min-height:70vh;background:radial-gradient(ellipse at 80% 0,#294a3738,transparent 50%)}.grid{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:28px}.chapter{color:var(--lime);font-weight:700;letter-spacing:3px;font-size:12px;text-transform:uppercase}.story{padding:37px 42px;background:#10231c;border:1px solid var(--line);box-shadow:8px 8px #030b07}.story p{color:#d4e0d5;font-size:16px;margin:0 0 18px}.story strong{color:#f5c986}.prompt{font-size:21px;font-weight:700;margin:32px 0 18px}.choice{display:flex;align-items:center;justify-content:space-between;width:100%;padding:19px 22px;margin:12px 0;text-align:left;color:#eaf4e5;background:#1b3628;border:1px solid #598364;font-weight:700}.choice:hover{background:#31583c;transform:translateX(3px)}.choice i{color:var(--lime);font-size:23px;font-style:normal}.side{background:#11231c;border:1px solid var(--line);padding:25px;height:max-content}.side h3{font-size:18px;margin:0 0 10px}.side p,.side li{font-size:13px;color:var(--muted)}.side ul{padding-left:20px}.ending{display:inline-block;border:1px solid #8a7750;color:#e7c183;padding:8px 12px;font-size:12px;font-weight:700;margin-bottom:20px}.form{max-width:700px;padding:32px;background:var(--panel);border:1px solid var(--line);margin:30px auto}.form label{display:block;margin:22px 0 10px;font-weight:700}.form select,.form textarea{width:100%;padding:14px;background:#081711;color:white;border:1px solid #57735d}.form textarea{min-height:130px}.fine{font-size:12px;color:#9ab49d}.footer{padding:28px 0;border-top:1px solid #365342;font-size:12px;color:#8fa696;display:flex;justify-content:space-between;gap:15px}
-@media(max-width:800px){.grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.temple{opacity:.4;right:-60px}.hero .wrap{padding-top:80px}header nav{gap:10px}header nav a:nth-child(1),header nav a:nth-child(2){display:none}}
-@media(max-width:550px){.wrap{padding:0 18px}.story{padding:25px}.hero h1{font-size:54px}.footer{flex-direction:column}.statline{font-size:9px}}
-</style></head><body>
-<header class="wrap"><strong><span class="logo"></span>LOST WORLD STUDIOS</strong><nav><a href="#home">Home</a><a href="#characters">Characters</a><a href="#about">About</a><a href="#feedback">Feedback</a><button id="sound">♪ Sound Off</button></nav></header>
-<main id="app"></main><footer class="wrap footer"><span>© 2026 Lost World Studios · ENGL 314 Digital Storytelling</span><span>Unofficial Minecraft-inspired fan story. Not affiliated with Mojang or Microsoft.</span></footer>
-<script src="story.js"></script></body></html>
+  :root{
+    --bg:#0b0d0a; --panel:#15180f; --panel2:#1d2116; --edge:#2f3524; --edgeHi:#4a5338;
+    --text:#e6e8d9; --muted:#9aa088; --accent:#6fcf4a; --accentDk:#3f8a26;
+    --gold:#f2c14e; --danger:#d9534f;
+    --scout:#7fc8f8; --engineer:#f2a541; --healer:#e58fd3; --guardian:#b39ddb; --alex:#9be370; --narr:#cfd3bf;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg);
+    background-image:
+      linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+    background-size:16px 16px;
+    color:var(--text);
+    font-family:'VT323',monospace; font-size:24px; line-height:1.3;
+    display:flex; justify-content:center; padding:18px 12px 40px;
+  }
+  .wrap{width:100%; max-width:860px}
+  header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px}
+  .brand{font-family:'Press Start 2P',monospace; font-size:12px; color:var(--accent); letter-spacing:1px; cursor:pointer; text-shadow:2px 2px 0 #000}
+  .tools{display:flex; gap:8px; align-items:center}
+  .found{font-size:20px; color:var(--muted)}
+  .found b{color:var(--gold); font-weight:normal}
+
+  /* pixel buttons */
+  .btn{
+    font-family:'Press Start 2P',monospace; font-size:11px; color:var(--text);
+    background:#3a3f30; border:0; padding:10px 12px; cursor:pointer;
+    box-shadow: inset -3px -3px 0 #23271c, inset 3px 3px 0 #5b634a, 0 0 0 2px #000;
+    transition:transform .05s;
+  }
+  .btn:hover{background:#4a5240}
+  .btn:active{transform:translateY(2px)}
+  .btn:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+  .btn.primary{background:var(--accentDk); box-shadow: inset -3px -3px 0 #275a16, inset 3px 3px 0 #6fcf4a, 0 0 0 2px #000}
+  .btn.primary:hover{background:#4c9e30}
+
+  .panel{
+    background:var(--panel);
+    box-shadow:0 0 0 3px #000, 0 0 0 6px var(--edge), 8px 8px 0 6px rgba(0,0,0,.6);
+    margin:6px;
+  }
+  canvas.scene{display:block; width:100%; height:auto; image-rendering:pixelated; background:#000}
+  .scene-wrap{position:relative}
+  .loc{
+    position:absolute; left:10px; top:10px;
+    font-family:'Press Start 2P',monospace; font-size:10px; color:#fff;
+    background:rgba(0,0,0,.65); padding:7px 9px; box-shadow:0 0 0 2px #000;
+  }
+  .body{padding:18px 20px 20px}
+  .line{margin:0 0 12px}
+  .speaker{font-family:'Press Start 2P',monospace; font-size:11px; display:inline-block; margin-right:8px; text-shadow:2px 2px 0 #000}
+  .narr{color:var(--narr)}
+  .say{color:var(--text)}
+  .choices{display:grid; gap:10px; margin-top:16px}
+  .choice{
+    text-align:left; font-family:'VT323',monospace; font-size:24px; line-height:1.2; color:var(--text);
+    background:var(--panel2); border:0; padding:12px 14px; cursor:pointer;
+    box-shadow: inset -3px -3px 0 #0f120b, inset 3px 3px 0 var(--edgeHi), 0 0 0 2px #000;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .choice:hover,.choice:focus-visible{background:#2a301f; outline:none; box-shadow: inset -3px -3px 0 #0f120b, inset 3px 3px 0 var(--accent), 0 0 0 2px #000}
+  .choice .k{font-family:'Press Start 2P',monospace; font-size:10px; color:var(--gold); padding-top:6px; flex:none}
+  .hint{font-size:19px; color:var(--muted); margin-top:12px}
+
+  /* title screen */
+  .title{text-align:center; padding:26px 20px 30px}
+  .title h1{font-family:'Press Start 2P',monospace; font-size:clamp(20px,5vw,38px); line-height:1.35; margin:6px 0 4px; color:#fff; text-shadow:4px 4px 0 #000, 0 0 18px rgba(111,207,74,.35)}
+  .title h1 span{display:block; font-size:.45em; color:var(--accent); margin-bottom:10px; letter-spacing:2px}
+  .title p{max-width:600px; margin:14px auto; color:var(--narr)}
+  .cast{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:18px 0 22px}
+  .tag{font-family:'Press Start 2P',monospace; font-size:9px; padding:7px 9px; background:#0d0f0a; box-shadow:0 0 0 2px #000, inset 0 0 0 2px currentColor}
+  .title .row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+  .credits{font-size:19px; color:var(--muted); margin-top:20px}
+
+  /* ending */
+  .ending-badge{font-family:'Press Start 2P',monospace; font-size:12px; color:#000; background:var(--gold); display:inline-block; padding:8px 10px; margin-bottom:12px; box-shadow:0 0 0 2px #000}
+  .ending-title{font-family:'Press Start 2P',monospace; font-size:clamp(16px,3.6vw,24px); color:#fff; margin:6px 0 14px; text-shadow:3px 3px 0 #000}
+  .slots{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 4px}
+  .slot{font-family:'Press Start 2P',monospace; font-size:9px; padding:9px 10px; background:#0d0f0a; color:#555c48; box-shadow:0 0 0 2px #000}
+  .slot.got{color:#000; background:var(--gold)}
+
+  .cursor{display:inline-block; width:10px; height:18px; background:var(--accent); vertical-align:-2px; animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .fade{animation:fade .35s ease-out}
+  @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
+  @media (max-width:560px){
+    body{font-size:21px; padding:10px 6px 30px}
+    .body{padding:14px 14px 16px}
+    .choice{font-size:21px}
+    .brand{font-size:9px}
+    .btn{font-size:9px; padding:9px 9px}
+    .found{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){ .fade,.cursor{animation:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand" id="home" title="Back to title" role="button" tabindex="0">▣ THE LOST WORLD</div>
+    <div class="tools">
+      <span class="found">Endings <b id="foundCount">0</b>/3</span>
+      <button class="btn" id="soundBtn" aria-pressed="false">♪ OFF</button>
+      <button class="btn" id="restartBtn">↺</button>
+    </div>
+  </header>
+  <main id="app" class="panel"></main>
+</div>
+
+<script>
+/* ---------------- STORY ---------------- */
+const C = {
+  Alex:{color:'var(--alex)'}, Scout:{color:'var(--scout)'}, Engineer:{color:'var(--engineer)'},
+  Healer:{color:'var(--healer)'}, Guardian:{color:'var(--guardian)'}
+};
+
+const STORY = {
+  start:{
+    scene:'spawn', loc:'Hollowmere · Spawn',
+    lines:[
+      ['', 'Two years. That is how long the world called Hollowmere has sat untouched on the server list.'],
+      ['', 'Alex loads in. The spawn platform he built is buried under vines. Every torch he placed has burned out — except a single line of them, freshly lit, leading north into the forest.'],
+      ['', 'Nailed to a post beside him is a sign he did not write:'],
+      ['', '“DON’T DIG DOWN.”'],
+      ['Alex', 'Somebody’s been here. Somebody’s still here.']
+    ],
+    choices:[
+      ['Follow the fresh torches into the forest.', 'scout', {reckless:0}],
+      ['Head to the old village first and look for supplies.', 'village_early']
+    ]
+  },
+
+  village_early:{
+    scene:'village', loc:'The Old Village',
+    lines:[
+      ['', 'The village is quiet, but not empty. Somebody has been patching the roofs. A chest by the well is full of bread — fresh bread.'],
+      ['', 'Pressed into the mud around the well are footprints: perfectly square, each one the size of a full block.'],
+      ['Alex', 'No mob in the game leaves prints like that.'],
+      ['', 'A twig snaps behind him.']
+    ],
+    choices:[
+      ['Spin around, sword out.', 'scout_sword', {reckless:1}],
+      ['Stay still and say hello.', 'scout']
+    ]
+  },
+
+  scout_sword:{
+    scene:'forest', loc:'Edge of the Forest',
+    lines:[
+      ['', 'Alex whirls and swings — and stops an inch from a girl in a leather cap, who has not even flinched.'],
+      ['Scout', 'If I wanted you gone, you’d already be respawning. Put it away.'],
+      ['Scout', 'I’m the Scout. I track things. Lately, I’ve been tracking the thing that made those prints.'],
+      ['Alex', 'Sorry. I’m… a little jumpy.'],
+      ['Scout', 'Good. Jumpy keeps you alive here. Reckless doesn’t.']
+    ],
+    choices:[
+      ['“What made the prints?”', 'scout_talk'],
+      ['“Show me where the tracks go. Now.”', 'tracks', {reckless:1}]
+    ]
+  },
+
+  scout:{
+    scene:'forest', loc:'The Torchlit Path',
+    lines:[
+      ['', 'The torches end at a campfire. Sitting beside it is a girl in a leather cap, sharpening arrows. She doesn’t look surprised.'],
+      ['Scout', 'You’re the one who built the spawn. I wondered when you’d come back.'],
+      ['Scout', 'I’m the Scout. I’ve been following square footprints around this world for weeks. Something big walks here at night.'],
+      ['Alex', 'Something… like what?'],
+      ['Scout', 'We call it the Guardian. Nobody knows what it’s guarding.']
+    ],
+    choices:[
+      ['“Tell me everything you know first.”', 'scout_talk'],
+      ['“Then let’s go find out. Right now.”', 'tracks', {reckless:1}]
+    ]
+  },
+
+  scout_talk:{
+    scene:'forest', loc:'The Campfire',
+    lines:[
+      ['Scout', 'Here’s what I know. The people who first built Hollowmere — the Builders — sealed something under the world before they left.'],
+      ['Scout', 'Not long after, the Guardian showed up. Huge. Silent. It walks the same loop every night: the village, the ravine, and a stone door in the hills.'],
+      ['Scout', 'A few players went looking for what’s behind the door. None of them logged back in.'],
+      ['Alex', 'So that’s what the sign means. “Don’t dig down.”'],
+      ['Scout', 'There are two others still here. The Engineer and the Healer. They’re in the village — and they can’t agree on anything. Come on.']
+    ],
+    choices:[
+      ['Go with Scout to the village.', 'village']
+    ]
+  },
+
+  tracks:{
+    scene:'ravine', loc:'The Ravine',
+    lines:[
+      ['', 'Alex sprints ahead along the tracks. Scout shouts something he doesn’t hear.'],
+      ['', 'The prints lead to the lip of a ravine. Alex steps onto what looks like solid stone — and it gives way. Gravel. A trap.'],
+      ['', 'Scout grabs his arm, but the falling blocks catch her leg. They both scramble back up, bruised and covered in dust.'],
+      ['Scout', 'That’s why I said WAIT. Half this world is rigged. You almost got us both killed.'],
+      ['Alex', '…I’m sorry. I didn’t think.'],
+      ['Scout', 'Start thinking. Come on — the Healer can look at this leg.']
+    ],
+    choices:[
+      ['Help Scout limp to the village.', 'village']
+    ]
+  },
+
+  village:{
+    scene:'village', loc:'The Old Village · Night',
+    lines:[
+      ['', 'Two people are arguing beside a tangle of redstone wiring.'],
+      ['Engineer', 'Pressure plates at the gate, pistons on both sides, a cage of obsidian. When it walks through tonight — snap. We trap it, and we finally get to see what’s behind that door.'],
+      ['Healer', 'And then what? I’ve watched it for weeks. It has never hurt anyone. Last week it carried a wolf out of the ravine. Your traps are the only thing that’s hurt anything here.'],
+      ['Engineer', 'People vanished!'],
+      ['Healer', 'People who went digging. Not people it hunted.'],
+      ['', 'They both turn to Alex.'],
+      ['Engineer', 'You built this world. You decide.']
+    ],
+    choices:[
+      ['Side with the Engineer: trap the Guardian.', 'trap'],
+      ['Side with the Healer: go meet the Guardian, unarmed.', 'approach'],
+      ['Decide nothing yet. Sneak off tonight and investigate alone.', 'archive', {reckless:1}]
+    ]
+  },
+
+  archive:{
+    scene:'library', loc:'The Builders’ Library',
+    lines:[
+      ['', 'While the others sleep, Alex slips into the collapsed library at the edge of the village.'],
+      ['', 'Under a fallen bookshelf he finds a journal. The last entry is written in a shaky hand:'],
+      ['', '“A corrupted chunk opened beneath the world. We called it the Void Seed. It eats blocks — then it eats saves. We could not delete it, only seal it. We built the Guardian to stand watch. If anyone reads this: do not open the vault. Do not tell anyone where it is.”'],
+      ['Alex', 'It’s not a monster. It’s a lock.']
+    ],
+    choices:[
+      ['Bring the journal back to the group.', 'reveal'],
+      ['You’ve come this far. Open the vault and see it for yourself.', 'vault', {reckless:1}]
+    ]
+  },
+
+  vault:{
+    scene:'vault', loc:'The Stone Door',
+    lines:[
+      ['', 'The stone door in the hills opens with one lever. Behind it, stairs go down into a black so deep it seems to hum.'],
+      ['', 'At the bottom floats a single block that is not a block — a flickering hole in the world, edges crawling with purple static. The Void Seed.'],
+      ['', 'The moment the door opens, the static spreads. The floor beneath Alex starts to vanish, pixel by pixel.'],
+      ['', 'Then the ground shakes. The Guardian drops into the stairwell, pushes Alex behind it, and presses its own body against the Seed. Its stone skin cracks as the static bites into it.'],
+      ['Guardian', 'NOW YOU KNOW.'],
+      ['Guardian', 'KNOWING IS A WEIGHT. CARRY IT CAREFULLY.']
+    ],
+    choices:[
+      ['Close the door. Walk back up into the light.', 'end_truth']
+    ]
+  },
+
+  reveal:{
+    scene:'village', loc:'The Old Village · Dawn',
+    lines:[
+      ['', 'At dawn Alex reads the journal out loud. Nobody speaks for a long time.'],
+      ['Engineer', '…So my traps would have pulled the lock off the door.'],
+      ['Healer', 'It’s been alone down there, holding that thing shut, for two years.'],
+      ['Scout', 'And it’s cracking. I’ve seen the marks on its shoulders.'],
+      ['Engineer', 'Then we have two choices. Help it hold the line — or get out of Hollowmere before the Seed gets loose.']
+    ],
+    choices:[
+      ['“We help the Guardian.”', 'guardian_meet'],
+      ['“We leave. This isn’t our fight.”', 'escape']
+    ]
+  },
+
+  trap:{
+    scene:'gate', loc:'The Village Gate · Midnight',
+    lines:[
+      ['', 'The Engineer’s trap works perfectly. At midnight the Guardian steps onto the pressure plate, pistons fire, and obsidian slams shut around it.'],
+      ['Engineer', 'HA! Got it!'],
+      ['', 'The Guardian doesn’t fight. It just turns its head toward the hills — and makes a low sound like grinding stone.'],
+      ['', 'In the distance, the sky over the hills flickers purple. The ground starts to tremble.'],
+      ['Healer', 'It’s not trying to escape. It’s trying to get BACK. Something is opening up there!'],
+      ['Scout', 'Whatever it was guarding — nobody’s guarding it now.']
+    ],
+    choices:[
+      ['Break the trap open and set the Guardian free.', 'free'],
+      ['Run for the nether portal before it reaches you.', 'escape', {reckless:1}]
+    ]
+  },
+
+  free:{
+    scene:'gate', loc:'The Village Gate',
+    lines:[
+      ['', 'Alex grabs a pickaxe and starts tearing at the obsidian. The Engineer hesitates — then rewires the pistons in reverse. The cage swings open.'],
+      ['', 'The Guardian rises, looks at Alex for one long second, and runs for the hills. They all follow.'],
+      ['', 'At the stone door, purple static is spilling out. The Guardian throws itself against it. The Healer pours potions over its cracked shoulders. The Engineer rebuilds the seal block by block. Scout watches the shadows.'],
+      ['', 'Alex stands with them, holding the line.']
+    ],
+    choices:[
+      ['Hold the door until sunrise.', 'end_trust']
+    ]
+  },
+
+  approach:{
+    scene:'hills', loc:'The Hills · Night',
+    lines:[
+      ['', 'Alex and the Healer leave their swords at the gate and walk into the hills. Scout follows at a distance. The Engineer stays behind, arms crossed.'],
+      ['', 'The Guardian is standing in front of a stone door. It’s taller than any build Alex ever made. Its shoulders are covered in cracks that glow faintly purple.'],
+      ['', 'It turns. Its voice sounds like rocks shifting.'],
+      ['Guardian', 'WHY ARE YOU HERE?']
+    ],
+    choices:[
+      ['“I came for answers. What are you hiding?”', 'guardian_test'],
+      ['“We came to help. You’re hurt.”', 'guardian_meet']
+    ]
+  },
+
+  guardian_test:{
+    scene:'vault', loc:'Behind the Stone Door',
+    lines:[
+      ['', 'The Guardian is quiet for a long time. Then it steps aside and opens the door just a crack.'],
+      ['', 'Far below, a flickering hole in the world pulses with purple static. Even from here, Alex can feel it pulling at the blocks around it.'],
+      ['Guardian', 'THE BUILDERS CALLED IT THE VOID SEED. IT DEVOURS WORLDS.'],
+      ['Guardian', 'EVERY PLAYER WHO KNOWS IT EXISTS WANTS TO SEE IT. EVERY ONE WHO SEES IT WANTS TO TOUCH IT.'],
+      ['Guardian', 'NOW YOU KNOW. WHAT WILL YOU DO WITH IT?']
+    ],
+    choices:[
+      ['“I’ll keep your secret — and I’ll help you keep it shut.”', 'end_trust'],
+      ['“People deserve to know what’s under their world.”', 'end_truth', {reckless:1}]
+    ]
+  },
+
+  guardian_meet:{
+    scene:'hills', loc:'The Stone Door',
+    lines:[
+      ['', 'The Guardian looks at them for a long moment. Then, slowly, it kneels so the Healer can reach the cracks on its shoulders.'],
+      ['Healer', 'You’ve been holding this together alone. Not anymore.'],
+      ['', 'Scout comes out of the trees. A minute later, so does the Engineer, carrying a chest of redstone.'],
+      ['Engineer', 'If my traps can hold a Guardian, they can reinforce a seal. Show me the weak spots.'],
+      ['Guardian', 'YOU… WOULD STAY?']
+    ],
+    choices:[
+      ['“We’re staying.”', 'end_trust']
+    ]
+  },
+
+  escape:{
+    scene:'portal', loc:'The Nether Portal',
+    lines:[
+      ['', 'Alex runs. Behind him, the purple glow spreads over the hills, and blocks start blinking out of existence one by one.'],
+      ['', 'The portal is still where he built it two years ago. He lights it with shaking hands.'],
+      ['Scout', 'Alex! Wait —'],
+      ['', 'He steps through without looking back.']
+    ],
+    choices:[
+      ['Let the portal take you.', 'end_escape']
+    ]
+  },
+
+  /* ---------------- ENDINGS ---------------- */
+  end_truth:{
+    ending:'truth', scene:'dawn', loc:'Ending · The Truth',
+    title:'THE TRUTH',
+    lines:[
+      ['', 'Alex climbs back to the surface with the truth in his head and no idea where to put it.'],
+      ['', 'He understands now why the Builders left that sign. Every player he tells will want to see the Seed. Every one who sees it will want to touch it.'],
+      ['', 'So he says nothing. He rebuilds the sign by the spawn — “DON’T DIG DOWN” — and adds one more line underneath: “Trust me.”'],
+      ['Alex', 'Some things you find out, you can’t un-find.']
+    ],
+    lesson:'Alex learned the truth — and learned that the truth can endanger the people you share it with.'
+  },
+  end_trust:{
+    ending:'trust', scene:'dawn', loc:'Ending · Trust',
+    title:'TRUST',
+    lines:[
+      ['', 'By sunrise, the purple static is gone. The seal is stronger than the Builders ever made it — redstone from the Engineer, potions from the Healer, a patrol route from Scout.'],
+      ['', 'The Guardian sits by the stone door, its cracks slowly closing.'],
+      ['Guardian', 'FOR TWO YEARS I THOUGHT EVERY PLAYER WAS A THREAT.'],
+      ['Alex', 'And for one night, I thought you were.'],
+      ['', 'Hollowmere shows up on the server list again: 5 players online. Four of them are players. One of them is not.']
+    ],
+    lesson:'Alex chose to understand before acting — and found that trust was stronger than any trap.'
+  },
+  end_escape:{
+    ending:'escape', scene:'void', loc:'Ending · Escape',
+    title:'ESCAPE',
+    lines:[
+      ['', 'The screen goes black. When it comes back, Alex is staring at the server list.'],
+      ['', 'Next to Hollowmere, the little icon has turned grey: “World unavailable.”'],
+      ['', 'He never finds out what was under the stone door. He never finds out whether Scout, the Engineer and the Healer made it out.'],
+      ['', 'Some nights he still checks the list. Some nights, for just a second, it says: “1 player online.”']
+    ],
+    lesson:'Alex survived — but running meant he never learned the truth, and never got to help.'
+  }
+};
+const ENDINGS = {truth:'THE TRUTH', trust:'TRUST', escape:'ESCAPE'};
+
+/* ---------------- STATE ---------------- */
+let state = {node:null, reckless:0};
+let found = new Set();
+try{ (JSON.parse(localStorage.getItem('lw_found')||'[]')).forEach(e=>found.add(e)); }catch(e){}
+function saveFound(){ try{ localStorage.setItem('lw_found', JSON.stringify([...found])); }catch(e){} updateFound(); }
+function updateFound(){ document.getElementById('foundCount').textContent = found.size; }
+
+/* ---------------- PIXEL SCENES ---------------- */
+const PAL = {
+  spawn:  {sky:['#1b2a3a','#2c4258'], ground:'#3e6b2a', dirt:'#5a3e26', tree:'#24451a', trunk:'#4a3220', accent:'#f2c14e', moon:true, torches:true},
+  village:{sky:['#141c2a','#25324a'], ground:'#3b5f28', dirt:'#5a3e26', tree:'#1f3b16', trunk:'#4a3220', accent:'#f2a541', moon:true, houses:true},
+  forest: {sky:['#0f1a14','#1b2e22'], ground:'#2f5221', dirt:'#4d3520', tree:'#18331a', trunk:'#3d2a1a', accent:'#f2c14e', dense:true, torches:true},
+  ravine: {sky:['#121722','#212a3a'], ground:'#4a4f44', dirt:'#33362f', tree:'#2a3d1f', trunk:'#3d2a1a', accent:'#9aa088', ravine:true},
+  library:{sky:['#16110c','#231a12'], ground:'#3b2b1d', dirt:'#2a1f15', tree:'#5b3d22', trunk:'#2a1f15', accent:'#f2c14e', inside:true},
+  gate:   {sky:['#120f1c','#2a1d3a'], ground:'#36502a', dirt:'#4d3520', tree:'#1c3218', trunk:'#3d2a1a', accent:'#b06cff', moon:true, houses:true, purple:true},
+  hills:  {sky:['#0e1020','#1d2240'], ground:'#3a5a2a', dirt:'#4d3520', tree:'#1c3218', trunk:'#3d2a1a', accent:'#b39ddb', moon:true, hills:true, door:true},
+  vault:  {sky:['#07060c','#140d22'], ground:'#2b2b33', dirt:'#1c1c22', tree:'#2b2b33', trunk:'#1c1c22', accent:'#b06cff', inside:true, seed:true},
+  portal: {sky:['#1a0f1f','#3a1630'], ground:'#3b2a2a', dirt:'#2a1d1d', tree:'#2a1d1d', trunk:'#1c1414', accent:'#c04dff', portal:true, purple:true},
+  dawn:   {sky:['#f4a36b','#6b8fc4'], ground:'#4f8a33', dirt:'#6a4a2c', tree:'#2f5a22', trunk:'#5a3e26', accent:'#f2c14e', sun:true, hills:true, door:true},
+  void:   {sky:['#000000','#05030a'], ground:'#111', dirt:'#000', tree:'#000', trunk:'#000', accent:'#444', voidy:true}
+};
+function rng(seed){ let s=seed; return ()=> (s = (s*16807)%2147483647)/2147483647; }
+function hashStr(s){ let h=7; for(const c of s) h=(h*31+c.charCodeAt(0))%2147483647; return h||1; }
+
+let animId=null;
+function drawScene(canvas, key){
+  const p = PAL[key]||PAL.spawn, W=96, H=40;
+  canvas.width=W; canvas.height=H;
+  const ctx=canvas.getContext('2d');
+  cancelAnimationFrame(animId);
+  const r0 = hashStr(key);
+  function frame(t){
+    const r=rng(r0);
+    // sky
+    for(let y=0;y<H;y++){
+      const k=y/H; ctx.fillStyle = mix(p.sky[0],p.sky[1],k); ctx.fillRect(0,y,W,1);
+    }
+    if(!p.inside && !p.voidy && !p.sun){ // stars
+      for(let i=0;i<26;i++){ const x=Math.floor(r()*W), y=Math.floor(r()*16); const tw=Math.sin(t/600+i)>0.6; ctx.fillStyle= tw?'#fff':'#8890a8'; ctx.fillRect(x,y,1,1); }
+    }
+    if(p.moon){ px(ctx,78,5,5,5,'#e8e6d0'); px(ctx,80,6,2,2,'#c9c6ad'); }
+    if(p.sun){ px(ctx,70,8,8,8,'#ffe08a'); px(ctx,71,9,6,6,'#fff1b8'); }
+    if(p.hills){ ctx.fillStyle=shade(p.ground,-25); for(let x=0;x<W;x++){ const h=Math.floor(8+6*Math.sin(x/9)+3*Math.sin(x/4)); ctx.fillRect(x,H-14-h,1,h); } }
+    if(p.inside){
+      ctx.fillStyle=shade(p.ground,-10); ctx.fillRect(0,0,W,H);
+      for(let y=0;y<H;y+=4) for(let x=(y/4)%2?0:4;x<W;x+=8){ ctx.fillStyle=shade(p.ground,-18+Math.floor(r()*12)); ctx.fillRect(x,y,8,4); }
+    }
+    // ground
+    const gy = H-9;
+    if(p.ravine){
+      ctx.fillStyle=p.ground; ctx.fillRect(0,gy,38,9); ctx.fillRect(58,gy,38,9);
+      ctx.fillStyle='#05060a'; ctx.fillRect(38,gy,20,9);
+      for(let i=0;i<6;i++) px(ctx,40+Math.floor(r()*16),gy+1+Math.floor(((t/120)+i*3)%8),1,1,'#7d7a6e');
+    } else if(!p.voidy){
+      for(let x=0;x<W;x++){ ctx.fillStyle=p.inside?shade(p.ground,-25):p.ground; ctx.fillRect(x,gy,1,2); ctx.fillStyle=p.dirt; ctx.fillRect(x,gy+2,1,7); }
+      for(let i=0;i<40;i++){ ctx.fillStyle=shade(p.dirt, r()>.5?10:-10); ctx.fillRect(Math.floor(r()*W),gy+2+Math.floor(r()*7),1,1); }
+    }
+    // trees
+    if(!p.inside && !p.voidy && !p.portal){
+      const n = p.dense?9:5;
+      for(let i=0;i<n;i++){
+        const x=Math.floor(r()*(W-6)); if(p.door && x>40 && x<58) continue; if(p.ravine && x>34 && x<60) continue;
+        const h=6+Math.floor(r()*5);
+        px(ctx,x+2,gy-h,2,h,p.trunk); px(ctx,x,gy-h-4,6,5,p.tree); px(ctx,x+1,gy-h-6,4,2,shade(p.tree,8));
+      }
+    }
+    if(p.houses){
+      [[8,10],[60,12],[78,9]].forEach(([x,w])=>{ px(ctx,x,gy-7,w,7,'#7a5a36'); px(ctx,x-1,gy-9,w+2,2,'#4a3220'); px(ctx,x+Math.floor(w/2)-1,gy-4,2,4,'#2a1d12'); const lit=Math.sin(t/300+x)>-0.3; px(ctx,x+1,gy-6,2,2, lit?'#f2c14e':'#3a2a16'); });
+      if(p.purple){ // obsidian cage at gate
+        px(ctx,40,gy-11,14,11,'#1a1028'); px(ctx,42,gy-9,10,9,'#2a1d3a');
+        const g=0.5+0.5*Math.sin(t/250); px(ctx,45,gy-8,4,6, mix('#4b3a6a','#b39ddb',g));
+      }
+    }
+    if(p.torches){ for(let x=10;x<W;x+=18){ px(ctx,x,gy-3,1,3,'#6b4a2a'); const f=Math.sin(t/120+x)>0?'#f2c14e':'#f28c28'; px(ctx,x,gy-4,1,1,f); } }
+    if(p.door){ px(ctx,42,gy-14,14,14,'#5a5a5a'); px(ctx,44,gy-12,10,12,'#3a3a3a'); px(ctx,48,gy-8,2,2, p.sun?'#888':'#b39ddb'); }
+    if(key==='hills' || (key==='gate')){ // guardian silhouette
+      const gx = key==='hills'?60:46, gyy = key==='hills'?gy-16:null;
+      if(key==='hills'){ px(ctx,gx,gyy,6,16,'#4a4560'); px(ctx,gx+1,gyy+2,4,2,'#b39ddb'); px(ctx,gx-2,gyy+5,2,8,'#3c3850'); px(ctx,gx+6,gyy+5,2,8,'#3c3850'); px(ctx,gx+1,gyy+6,1,1,'#c04dff'); px(ctx,gx+4,gyy+9,1,1,'#c04dff'); }
+    }
+    if(p.inside && key==='library'){
+      for(let i=0;i<5;i++){ const x=6+i*18; px(ctx,x,6,12,gy-6,'#4a3220'); for(let s=0;s<4;s++){ for(let b=0;b<10;b+=2){ px(ctx,x+1+b,8+s*7,1,5,['#8a3b2b','#2b5a8a','#4f7a2b','#8a7a2b'][(b+s+i)%4]); } } }
+      px(ctx,44,gy-3,8,3,'#d8c9a0'); // journal
+      const f=0.5+0.5*Math.sin(t/200); px(ctx,30,gy-5,1,2,'#6b4a2a'); px(ctx,30,gy-6,1,1, f>.5?'#f2c14e':'#f28c28');
+    }
+    if(p.seed){
+      for(let y=10;y<gy;y+=4){ px(ctx,20+(y-10),y,6,1,'#3a3a44'); }
+      const cx=56, cy=18, pulse=Math.sin(t/180);
+      for(let i=0;i<30;i++){ const a=r()*Math.PI*2, d=3+r()*9+pulse*2; ctx.fillStyle = r()>.5?'#c04dff':'#5a1f8a'; ctx.fillRect(Math.round(cx+Math.cos(a)*d),Math.round(cy+Math.sin(a)*d*0.7),1,1); }
+      px(ctx,cx-3,cy-3,6,6,'#000'); px(ctx,cx-2,cy-2,4,4, pulse>0?'#2a0a40':'#000');
+    }
+    if(p.portal){
+      px(ctx,38,gy-20,20,20,'#160f20'); px(ctx,40,gy-18,16,18,'#1a1028');
+      for(let i=0;i<60;i++){ ctx.fillStyle = (Math.sin(t/150+i)>0)?'#c04dff':'#7a2bb0'; ctx.fillRect(40+Math.floor(r()*16), gy-18+Math.floor(((r()*18)+t/80)%18),1,1); }
+    }
+    if(p.purple && key!=='portal'){ ctx.fillStyle=`rgba(176,108,255,${0.08+0.06*Math.sin(t/400)})`; ctx.fillRect(0,0,W,gy); }
+    if(p.voidy){
+      for(let i=0;i<50;i++){ const x=Math.floor(r()*W), y=Math.floor(r()*H); const on=Math.sin(t/300+i*1.7)>0.7; if(on){ ctx.fillStyle='#3a3a3a'; ctx.fillRect(x,y,1,1);} }
+      const blink = Math.floor(t/700)%2; if(blink){ px(ctx,46,18,4,4,'#222'); }
+    }
+    animId=requestAnimationFrame(frame);
+  }
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ frame(0); cancelAnimationFrame(animId); }
+  else animId=requestAnimationFrame(frame);
+}
+function px(c,x,y,w,h,col){ c.fillStyle=col; c.fillRect(x,y,w,h); }
+function hex(h){ h=h.replace('#',''); if(h.length===3) h=h.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(h.substr(i,2),16)); }
+function mix(a,b,k){ const A=hex(a),B=hex(b); return `rgb(${A.map((v,i)=>Math.round(v+(B[i]-v)*k)).join(',')})`; }
+function shade(a,d){ const A=hex(a); return `rgb(${A.map(v=>Math.max(0,Math.min(255,v+d))).join(',')})`; }
+
+/* ---------------- AUDIO (generated, no files) ---------------- */
+let actx=null, master=null, droneNodes=[], soundOn=false;
+function initAudio(){
+  if(actx) return;
+  const AC = window.AudioContext||window.webkitAudioContext; if(!AC) return;
+  actx = new AC(); master = actx.createGain(); master.gain.value=0; master.connect(actx.destination);
+  const filt = actx.createBiquadFilter(); filt.type='lowpass'; filt.frequency.value=700; filt.connect(master);
+  [[110,0.05],[164.8,0.03],[220.5,0.02]].forEach(([f,g])=>{
+    const o=actx.createOscillator(); o.type='triangle'; o.frequency.value=f;
+    const gn=actx.createGain(); gn.gain.value=g;
+    const lfo=actx.createOscillator(); lfo.frequency.value=0.07+Math.random()*0.08; const lg=actx.createGain(); lg.gain.value=g*0.8; lfo.connect(lg); lg.connect(gn.gain); lfo.start();
+    o.connect(gn); gn.connect(filt); o.start(); droneNodes.push(o);
+  });
+  // slow melody notes
+  const scale=[220,246.9,261.6,329.6,349.2,440];
+  setInterval(()=>{ if(!soundOn) return; note(scale[Math.floor(Math.random()*scale.length)], 1.8, 0.035, 'sine'); }, 2600);
+}
+function note(freq,dur,vol,type){
+  if(!actx||!soundOn) return;
+  const o=actx.createOscillator(), g=actx.createGain(); o.type=type||'square'; o.frequency.value=freq;
+  g.gain.setValueAtTime(0,actx.currentTime); g.gain.linearRampToValueAtTime(vol,actx.currentTime+0.02); g.gain.exponentialRampToValueAtTime(0.0001,actx.currentTime+dur);
+  o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime+dur+0.05);
+}
+function sfxClick(){ note(660,0.08,0.05,'square'); setTimeout(()=>note(880,0.08,0.04,'square'),60); }
+function sfxEnding(kind){ const seq = kind==='escape'?[392,330,262,196]:kind==='truth'?[262,311,392,466]:[262,330,392,523]; seq.forEach((f,i)=>setTimeout(()=>note(f,0.5,0.06,'triangle'),i*220)); }
+function sfxRumble(){ note(55,1.2,0.12,'sawtooth'); }
+const soundBtn=document.getElementById('soundBtn');
+soundBtn.addEventListener('click', async ()=>{
+  try{
+    initAudio(); if(!actx) return;
+    if(actx.state==='suspended') await actx.resume();
+    soundOn=!soundOn;
+    master.gain.cancelScheduledValues(actx.currentTime);
+    master.gain.linearRampToValueAtTime(soundOn?1:0, actx.currentTime+0.6);
+    soundBtn.textContent = soundOn?'♪ ON':'♪ OFF'; soundBtn.setAttribute('aria-pressed', soundOn);
+    if(soundOn) sfxClick();
+  }catch(e){}
+});
+
+/* ---------------- RENDER ---------------- */
+const app=document.getElementById('app');
+let typing=null;
+
+function renderTitle(){
+  cancelAnimationFrame(animId); clearTimeout(typing);
+  state={node:null,reckless:0};
+  app.innerHTML = `
+    <div class="scene-wrap"><canvas class="scene" id="cv"></canvas></div>
+    <div class="title fade">
+      <h1><span>MINECRAFT</span>THE LOST WORLD</h1>
+      <p>Alex returns to a world he abandoned two years ago — and finds the torches freshly lit, a warning nailed to a post, and footprints no mob could make.</p>
+      <p>Something is guarding a secret beneath Hollowmere. Your choices decide whether Alex uncovers it, earns its trust, or runs.</p>
+      <div class="cast">
+        <span class="tag" style="color:var(--alex)">ALEX</span>
+        <span class="tag" style="color:var(--scout)">SCOUT</span>
+        <span class="tag" style="color:var(--engineer)">ENGINEER</span>
+        <span class="tag" style="color:var(--healer)">HEALER</span>
+        <span class="tag" style="color:var(--guardian)">THE GUARDIAN</span>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="play">▶ START</button>
+        <button class="btn" id="howBtn">HOW TO PLAY</button>
+      </div>
+      <div id="how" class="hint" hidden style="max-width:560px;margin:16px auto 0">
+        Read each scene, then pick what Alex does. Choices change the story and lead to one of three endings: <b style="color:var(--gold);font-weight:normal">The Truth</b>, <b style="color:var(--gold);font-weight:normal">Trust</b>, or <b style="color:var(--gold);font-weight:normal">Escape</b>. Tap the text to skip ahead, or use keys 1–3. Turn on ♪ for music and sound.
+      </div>
+      <div class="slots" style="justify-content:center">${Object.entries(ENDINGS).map(([k,v])=>`<span class="slot ${found.has(k)?'got':''}">${found.has(k)?'★ ':'? '}${v}</span>`).join('')}</div>
+      <div class="credits">An interactive story · ENGL 314 Digital Storytelling<br>Created by Alessandro</div>
+    </div>`;
+  drawScene(document.getElementById('cv'),'spawn');
+  document.getElementById('play').onclick=()=>{ sfxClick(); go('start'); };
+  document.getElementById('howBtn').onclick=()=>{ const h=document.getElementById('how'); h.hidden=!h.hidden; };
+}
+
+function go(id, effects){
+  if(effects && effects.reckless) state.reckless += effects.reckless;
+  state.node=id;
+  const n=STORY[id];
+  clearTimeout(typing);
+  app.innerHTML = `
+    <div class="scene-wrap"><canvas class="scene" id="cv"></canvas><div class="loc">${n.loc}</div></div>
+    <div class="body fade" id="body">
+      ${n.ending?`<div class="ending-badge">★ ENDING UNLOCKED</div><div class="ending-title">${n.title}</div>`:''}
+      <div id="lines" aria-live="polite"></div>
+      <div id="after"></div>
+    </div>`;
+  drawScene(document.getElementById('cv'), n.scene);
+  if(['trap','vault','escape'].includes(id)) sfxRumble();
+  playLines(n);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function lineHTML([who,text]){
+  if(!who) return `<p class="line narr">${text}</p>`;
+  return `<p class="line say"><span class="speaker" style="color:${C[who].color}">${who.toUpperCase()}</span>${text}</p>`;
+}
+
+function playLines(n){
+  const box=document.getElementById('lines'), body=document.getElementById('body');
+  let i=0, skipping=false;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function next(){
+    if(i>=n.lines.length){ body.onclick=null; finish(n); return; }
+    box.insertAdjacentHTML('beforeend', lineHTML(n.lines[i]));
+    const el=box.lastElementChild; el.classList.add('fade');
+    i++;
+    typing=setTimeout(next, (skipping||reduced)?0:Math.min(2600, 700 + n.lines[i-1][1].length*18));
+  }
+  body.onclick=(e)=>{ if(e.target.closest('button')) return; skipping=true; clearTimeout(typing); next(); };
+  next();
+}
+
+function finish(n){
+  const after=document.getElementById('after');
+  if(n.ending){
+    found.add(n.ending); saveFound(); sfxEnding(n.ending);
+    const extra = state.reckless>=2 ? `<p class="line narr" style="color:var(--muted)">(Alex rushed in more than once along the way. Next time, maybe he'll stop and listen.)</p>` :
+                  state.reckless===0 ? `<p class="line narr" style="color:var(--muted)">(Alex never rushed in once. He's not the reckless player who logged in anymore.)</p>` : '';
+    after.innerHTML = `
+      <p class="line" style="color:var(--gold)">${n.lesson}</p>${extra}
+      <div class="slots">${Object.entries(ENDINGS).map(([k,v])=>`<span class="slot ${found.has(k)?'got':''}">${found.has(k)?'★ ':'? '}${v}</span>`).join('')}</div>
+      <p class="hint">${found.size<3?`You've found ${found.size} of 3 endings. Try different choices to find the rest.`:'You found all three endings. Hollowmere has no more secrets from you.'}</p>
+      <div class="choices">
+        <button class="btn primary" id="again">↺ PLAY AGAIN</button>
+        <button class="btn" id="toTitle">TITLE SCREEN</button>
+      </div>`;
+    document.getElementById('again').onclick=()=>{ sfxClick(); state.reckless=0; go('start'); };
+    document.getElementById('toTitle').onclick=renderTitle;
+    return;
+  }
+  after.innerHTML = `<div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}"><span class="k">${i+1}</span><span>${c[0]}</span></button>`).join('')}</div>`;
+  after.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{ const c=n.choices[+b.dataset.i]; sfxClick(); go(c[1],c[2]); });
+  after.querySelector('.choice').focus({preventScroll:true});
+}
+
+document.addEventListener('keydown',e=>{
+  const k=parseInt(e.key,10);
+  if(k>=1&&k<=3){ const b=document.querySelector(`.choice[data-i="${k-1}"]`); if(b) b.click(); }
+});
+document.getElementById('restartBtn').onclick=()=>{ state.reckless=0; go('start'); };
+document.getElementById('restartBtn').title='Restart story';
+const home=document.getElementById('home');
+home.onclick=renderTitle; home.onkeydown=e=>{ if(e.key==='Enter') renderTitle(); };
+
+updateFound();
+renderTitle();
+</script>
+</body>
+</html>
