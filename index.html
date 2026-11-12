@@ -27,7 +27,29 @@
     display:flex; justify-content:center; padding:18px 12px 40px;
   }
   .wrap{width:100%; max-width:860px}
-  header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px}
+  header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; flex-wrap:wrap}
+  .nav{display:flex; gap:6px; flex-wrap:wrap}
+  .nav a{font-family:'Press Start 2P',monospace; font-size:10px; color:var(--muted); text-decoration:none; padding:8px 9px; background:#15180f; box-shadow:0 0 0 2px #000}
+  .nav a:hover,.nav a:focus-visible{color:var(--text); outline:none; box-shadow:0 0 0 2px #000, inset 0 -3px 0 var(--edgeHi)}
+  .nav a.on{color:#000; background:var(--accent)}
+  .page{padding:22px 24px 26px}
+  .page h2{font-family:'Press Start 2P',monospace; font-size:clamp(15px,3vw,20px); color:#fff; margin:0 0 6px; text-shadow:3px 3px 0 #000}
+  .page .kicker{font-family:'Press Start 2P',monospace; font-size:10px; color:var(--accent); letter-spacing:1px; margin-bottom:16px}
+  .page h3{font-family:'Press Start 2P',monospace; font-size:11px; color:var(--gold); margin:24px 0 8px; line-height:1.5}
+  .page p{margin:0 0 12px; color:var(--narr)}
+  .page ul{margin:0 0 12px; padding-left:22px; color:var(--narr)}
+  .page li{margin-bottom:6px}
+  .page li b, .page p b{color:var(--text); font-weight:normal}
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:8px 0 12px}
+  .compare div{background:var(--panel2); padding:12px 14px; box-shadow:0 0 0 2px #000}
+  .compare h4{font-family:'Press Start 2P',monospace; font-size:9px; margin:0 0 8px; color:var(--muted)}
+  .compare div:last-child h4{color:var(--accent)}
+  .members{display:grid; gap:12px; margin-top:8px}
+  .member{display:flex; gap:14px; align-items:center; background:var(--panel2); padding:14px; box-shadow:0 0 0 2px #000}
+  .avatar{width:56px; height:56px; flex:none; image-rendering:pixelated; box-shadow:0 0 0 2px #000}
+  .member .name{font-family:'Press Start 2P',monospace; font-size:11px; color:#fff; margin-bottom:6px}
+  .member .role{color:var(--muted); font-size:21px}
+  @media (max-width:560px){ .compare{grid-template-columns:1fr} .page{padding:16px 14px 18px} .nav a{font-size:8px; padding:7px 7px} }
   .brand{font-family:'Press Start 2P',monospace; font-size:12px; color:var(--accent); letter-spacing:1px; cursor:pointer; text-shadow:2px 2px 0 #000}
   .tools{display:flex; gap:8px; align-items:center}
   .found{font-size:20px; color:var(--muted)}
@@ -110,6 +132,12 @@
 <div class="wrap">
   <header>
     <div class="brand" id="home" title="Back to title" role="button" tabindex="0">▣ THE LOST WORLD</div>
+    <nav class="nav" aria-label="Site pages">
+      <a href="#home" data-page="home">HOME</a>
+      <a href="#proposal" data-page="proposal">PROPOSAL</a>
+      <a href="#about" data-page="about">ABOUT</a>
+      <a href="#play" data-page="play">PLAY</a>
+    </nav>
     <div class="tools">
       <span class="found">Endings <b id="foundCount">0</b>/3</span>
       <button class="btn" id="soundBtn" aria-pressed="false">♪ OFF</button>
@@ -555,6 +583,7 @@ let typing=null;
 function renderTitle(){
   cancelAnimationFrame(animId); clearTimeout(typing);
   state={node:null,reckless:0};
+  setNav('home');
   app.innerHTML = `
     <div class="scene-wrap"><canvas class="scene" id="cv"></canvas></div>
     <div class="title fade">
@@ -571,6 +600,7 @@ function renderTitle(){
       <div class="row">
         <button class="btn primary" id="play">▶ START</button>
         <button class="btn" id="howBtn">HOW TO PLAY</button>
+        <a class="btn" href="#proposal" style="text-decoration:none">READ THE PROPOSAL</a>
       </div>
       <div id="how" class="hint" hidden style="max-width:560px;margin:16px auto 0">
         Read each scene, then pick what Alex does. Choices change the story and lead to one of three endings: <b style="color:var(--gold);font-weight:normal">The Truth</b>, <b style="color:var(--gold);font-weight:normal">Trust</b>, or <b style="color:var(--gold);font-weight:normal">Escape</b>. Tap the text to skip ahead, or use keys 1–3. Turn on ♪ for music and sound.
@@ -586,6 +616,7 @@ function renderTitle(){
 function go(id, effects){
   if(effects && effects.reckless) state.reckless += effects.reckless;
   state.node=id;
+  setNav('play');
   const n=STORY[id];
   clearTimeout(typing);
   app.innerHTML = `
@@ -636,13 +667,101 @@ function finish(n){
         <button class="btn" id="toTitle">TITLE SCREEN</button>
       </div>`;
     document.getElementById('again').onclick=()=>{ sfxClick(); state.reckless=0; go('start'); };
-    document.getElementById('toTitle').onclick=renderTitle;
+    document.getElementById('toTitle').onclick=goHome;
     return;
   }
   after.innerHTML = `<div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}"><span class="k">${i+1}</span><span>${c[0]}</span></button>`).join('')}</div>`;
   after.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{ const c=n.choices[+b.dataset.i]; sfxClick(); go(c[1],c[2]); });
   after.querySelector('.choice').focus({preventScroll:true});
 }
+
+/* ---------------- EXTRA PAGES ---------------- */
+function pageShell(sceneKey, loc, inner){
+  cancelAnimationFrame(animId); clearTimeout(typing);
+  app.innerHTML = `<div class="scene-wrap"><canvas class="scene" id="cv"></canvas><div class="loc">${loc}</div></div><div class="page fade">${inner}</div>`;
+  drawScene(document.getElementById('cv'), sceneKey);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderProposal(){
+  pageShell('library','Proposal',`
+    <h2>THE PROPOSAL</h2>
+    <div class="kicker">REDESIGNING MINECRAFT AS AN INTERACTIVE STORY</div>
+
+    <h3>THE ORIGINAL STORY</h3>
+    <p>Minecraft is a sandbox game with almost no written story. Players build, explore, and survive in a world made of blocks, and any "story" comes from what the player decides to do. There are no main characters who talk, no plot, and no ending besides the optional Ender Dragon fight. One experience almost every player has, though, is leaving an old world behind and coming back to it years later.</p>
+
+    <h3>OUR REDESIGN</h3>
+    <p><b>Minecraft: The Lost World</b> turns that experience into an interactive mystery. Alex returns to Hollowmere, a world he abandoned two years ago, and finds freshly lit torches, a warning sign that says "DON'T DIG DOWN," and giant square footprints left by a silent Guardian. With help from the Scout, the Engineer, and the Healer, the player decides how Alex deals with the Guardian and the secret it protects. Every choice changes the path, and the story ends in one of three ways: <b>The Truth</b>, <b>Trust</b>, or <b>Escape</b>.</p>
+
+    <div class="compare">
+      <div><h4>ORIGINAL MINECRAFT</h4>
+        <ul><li>No dialogue or named characters</li><li>Player invents the story</li><li>Goal is to build and survive</li><li>One optional ending</li></ul></div>
+      <div><h4>THE LOST WORLD</h4>
+        <ul><li>Five characters with their own roles and voices</li><li>Written branching story with choices</li><li>Goal is to uncover a mystery and make moral decisions</li><li>Three different endings</li></ul></div>
+    </div>
+
+    <h3>WHY IT MATTERS</h3>
+    <p>The story is about what happens when you come back to something you left behind, and what you do with the truth once you find it. Alex starts out reckless and slowly learns to listen, think before acting, and trust others. The Guardian shows that something that looks like a monster can actually be a protector. These themes of responsibility, trust, and how knowing the truth can put other people in danger give a game that's usually about building blocks real emotional weight.</p>
+
+    <h3>WHAT MAKES IT UNIQUE</h3>
+    <ul>
+      <li><b>Choices matter:</b> the game tracks whether Alex acts recklessly or carefully, and each ending reflects how he changed.</li>
+      <li><b>Characters with purpose:</b> the Scout tracks, the Engineer builds traps, the Healer heals and persuades, and they disagree with each other.</li>
+      <li><b>Built for the browser:</b> animated pixel-art scenes and generated music and sound effects, with no downloads needed and phone support.</li>
+      <li><b>Replay value:</b> an endings tracker encourages players to go back and find all three outcomes.</li>
+    </ul>
+
+    <h3>TARGET AUDIENCE</h3>
+    <p>Teens and young adults who play or grew up with Minecraft, especially players who remember returning to an old world. It's also for fans of interactive fiction and choose-your-own-adventure stories, and for anyone interested in how games can tell stories through choices.</p>
+
+    <h3>HOW THE SITE IS ORGANIZED</h3>
+    <p>The site is organized by <b>category</b> and <b>hierarchy</b>. <b>Home</b> introduces the project, <b>Proposal</b> explains the redesign, <b>About</b> introduces the team, and <b>Play</b> is the finished story. Inside the game, the story is organized by <b>time</b>, moving scene by scene from Alex's return to one of the three endings.</p>
+
+    <div class="choices" style="margin-top:20px"><a class="btn primary" href="#play" style="text-align:center;text-decoration:none">▶ PLAY THE STORY</a></div>
+  `);
+}
+
+function avatarSVG(face, shirt, hair){
+  const s = `<svg class="avatar" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    <rect width="8" height="8" fill="${face}"/><rect width="8" height="2" fill="${hair}"/><rect y="2" width="1" height="2" fill="${hair}"/><rect x="7" y="2" width="1" height="2" fill="${hair}"/>
+    <rect x="1" y="4" width="2" height="1" fill="#fff"/><rect x="2" y="4" width="1" height="1" fill="#4a2c14"/><rect x="5" y="4" width="2" height="1" fill="#fff"/><rect x="5" y="4" width="1" height="1" fill="#4a2c14"/>
+    <rect x="1" y="3" width="2" height="1" fill="#141414"/><rect x="5" y="3" width="2" height="1" fill="#141414"/><rect x="3" y="6" width="2" height="1" fill="#a8484a"/><rect y="7" width="8" height="1" fill="${shirt}"/></svg>`;
+  return s;
+}
+
+function renderAbout(){
+  pageShell('village','About the Team',`
+    <h2>ABOUT</h2>
+    <div class="kicker">ENGL 314 · DIGITAL STORYTELLING · PROJECT 3</div>
+    <p>Minecraft: The Lost World was created for ENGL 314 Digital Storytelling as a redesign of a well-known story into a new digital form. I chose Minecraft because almost everyone my age has played it, and because a game with no written story left plenty of room to create one.</p>
+    <div class="members">
+      <div class="member">${avatarSVG('#e0b48a','#c8553d','#141414')}
+        <div><div class="name">ALESSANDRO SIALER</div><div class="role">Writer, designer &amp; web developer. Wrote the story and branching choices, designed the pixel-art look, and built the site.</div></div>
+      </div>
+    </div>
+    <h3>CHARACTERS</h3>
+    <ul>
+      <li><b style="color:var(--alex)">Alex</b>: a player returning to the world he abandoned.</li>
+      <li><b style="color:var(--scout)">Scout</b>: tracks the Guardian's footprints and knows the land.</li>
+      <li><b style="color:var(--engineer)">Engineer</b>: builds redstone traps and wants answers.</li>
+      <li><b style="color:var(--healer)">Healer</b>: heals creatures and believes the Guardian is not the enemy.</li>
+      <li><b style="color:var(--guardian)">The Guardian</b>: a silent giant protecting a dangerous secret.</li>
+    </ul>
+    <p style="color:var(--muted);font-size:20px;margin-top:18px">Minecraft is a trademark of Mojang Studios. This is a fan-made school project and is not affiliated with Mojang or Microsoft.</p>
+  `);
+}
+
+/* ---------------- ROUTING ---------------- */
+function setNav(page){ document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('on', a.dataset.page===page)); }
+function route(){
+  const h = (location.hash||'#home').slice(1);
+  if(h==='proposal'){ setNav('proposal'); renderProposal(); }
+  else if(h==='about'){ setNav('about'); renderAbout(); }
+  else if(h==='play'){ setNav('play'); state.reckless=0; go('start'); }
+  else { setNav('home'); renderTitle(); }
+}
+window.addEventListener('hashchange', route);
 
 document.addEventListener('keydown',e=>{
   const k=parseInt(e.key,10);
@@ -651,10 +770,11 @@ document.addEventListener('keydown',e=>{
 document.getElementById('restartBtn').onclick=()=>{ state.reckless=0; go('start'); };
 document.getElementById('restartBtn').title='Restart story';
 const home=document.getElementById('home');
-home.onclick=renderTitle; home.onkeydown=e=>{ if(e.key==='Enter') renderTitle(); };
+function goHome(){ if(location.hash && location.hash!=='#home') location.hash='home'; else { setNav('home'); renderTitle(); } }
+home.onclick=goHome; home.onkeydown=e=>{ if(e.key==='Enter') goHome(); };
 
 updateFound();
-renderTitle();
+route();
 </script>
 </body>
 </html>
